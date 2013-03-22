@@ -1,0 +1,15 @@
+Helpdesk Satisfaction Survey 
+
+Hello, 
+
+We've sent you this email so that you can help us get a bit of insight into how well we're taking care of you.
+Please follow the link below to the survey.
+
+{% url 'survey:fill' code=code %}
+
+Please note, this is not a phishing email. We won't be asking you for any identifying details, 
+nor will we ever ask you for your username of password in an email, 
+or link you to a page that requests such details. 
+
+Thank you for your consideration, 
+The ICONZ-Webvisions Customer Care Team 

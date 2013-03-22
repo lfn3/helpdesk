@@ -1,0 +1,25 @@
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/public.css">
+	<link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Open+Sans:300italic,600italic,300,600' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+	<header>
+		<img src="http://iconz-webvisions.com/sites/iconz-webvisions.com/files/icw-logo.png"/>
+	</header>
+	<section>
+		<h1> Helpdesk Satisfaction Survey </h1>
+
+		<p> Hello, </p>
+
+		<p> We've sent you this email so that you can help us get a bit of insight into how well we're taking care of you. Please follow <a href="{% url 'survey:fill' code=code %}"> this link </a> to the survey.</p>
+
+		<p> Please note, this is not a phishing email. We won't be asking you for any identifying details, nor will we ever ask you for your username of password in an email, or link you to a page that requests such details. </p>
+
+		<p> Thank you for your consideration, </p>
+		<p> The ICONZ-Webvisions Customer Care Team </p>
+	</section>
+</body>
+</html>
