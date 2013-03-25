@@ -42,6 +42,9 @@ class SurveyPriv(models.Model):
 					SurveyPriv.objects.get(code=self.code)
 					self.code = code_gen(length = sanityCheck / 4 + 4)
 					sanityCheck += 1
+
+					while self.code is 'admin':
+						self.code = code_gen(length = sanityCheck / 4 + 4)
 				except SurveyPriv.DoesNotExist:
 					codeTest = True
 
