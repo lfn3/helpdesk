@@ -9,4 +9,4 @@ urlpatterns = patterns('',
 	url(r'^', include('survey.urls', namespace='survey', app_name='survey')),
 )
 
-handler404 = 'survey.urls.index'
+handler404 = 'survey.views.index'
