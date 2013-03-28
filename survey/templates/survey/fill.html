@@ -10,7 +10,7 @@
 		<img src="http://iconz-webvisions.com/sites/iconz-webvisions.com/files/icw-logo.png"/>
 	</header>
 	<section>
-		<h1> Helpdesk Satisfaction Survey </h1>
+		<h1> Customer Care Satisfaction Survey </h1>
 		{% if error_message %}<p> <strong>{{error_message}} </strong> </p> {% endif %}
 		<form action="{% url 'survey:post' code=code %}" method="post">
 			{% csrf_token %}
@@ -26,7 +26,7 @@
 			<label><input id="first_time_res" name="first_time_res" type="radio" value="True"/> Yes </label>
 			<label><input id="first_time_res" name="first_time_res" type="radio" value="False"/> No </label>
 
-			Do you have any other comments on your experience with our helpdesk team?
+			Do you have any other comments on your experience with our customer care team?
 			<textarea id="customer_comments" name="customer_comments" cols="70" rows="5"></textarea>
 
 			<input type="submit" value="Submit" margin-left="0 px">
