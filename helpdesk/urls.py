@@ -10,3 +10,6 @@ urlpatterns = patterns('',
 )
 
 handler404 = 'survey.views.index'
+
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+urlpatterns += staticfiles_urlpatterns()

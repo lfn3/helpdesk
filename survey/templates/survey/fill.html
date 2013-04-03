@@ -1,7 +1,7 @@
 <html>
 
 <head>
-	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/public.css">
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}public.css">
 	<link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Open+Sans:300italic,600italic,300,600' rel='stylesheet' type='text/css'>
 </head>
 
@@ -15,11 +15,10 @@
 		<form action="{% url 'survey:post' code=code %}" method="post">
 			{% csrf_token %}
 			How do you rate the customer service you received from us?
-			<label><input id="rating" name="rating" type="radio" value="4"/> Excellent </label>
-			<label><input id="rating" name="rating" type="radio" value="3"/> Good </label>
-			<label><input id="rating" name="rating" type="radio" value="2"/> Average </label>
-			<label><input id="rating" name="rating" type="radio" value="1"/> Poor </label>
-			<label><input id="rating" name="rating" type="radio" value="0"/>  Terrible </label>
+			<label><input id="rating" name="rating" type="radio" value="3"/> Excellent </label>
+			<label><input id="rating" name="rating" type="radio" value="2"/> Good </label>
+			<label><input id="rating" name="rating" type="radio" value="1"/> Average </label>
+			<label><input id="rating" name="rating" type="radio" value="0"/> Poor </label>
 
 
 			Were your issue(s) resolved the first time you contacted us?
@@ -29,7 +28,7 @@
 			Do you have any other comments on your experience with our customer care team?
 			<textarea id="customer_comments" name="customer_comments" cols="70" rows="5"></textarea>
 
-			<input type="submit" value="Submit" margin-left="0 px">
+			<p class="sub-label">Thank you for taking the time to complete this survey</p><input class="submit" type="submit" value="Submit"/>
 		</form>
 	</section>
 </body>

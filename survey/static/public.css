@@ -31,6 +31,12 @@ label {
   margin-bottom: 5px;
 }
 
+p.sub-label {
+  display: inline-block;
+  margin-right: 2.7em;
+  margin-left: 1.5em;
+}
+
 input {
 	margin-left: 25px;
 }
@@ -72,7 +78,6 @@ font-size: 14px;
 height: 30px;
 image-rendering: auto;
 line-height: 20px;
-margin-top: 20px;
 padding-bottom: 4px;
 padding-left: 12px;
 padding-right: 12px;
