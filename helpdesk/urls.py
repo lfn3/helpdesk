@@ -5,9 +5,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^admin/', include(admin.site.urls)),
-	url(r'^', include('survey.urls', namespace='survey', app_name='survey')),
-)
+	url(r'^admin/', include(admin.site.urls)),
+	url(r'^', include('survey.urls', namespace='survey', app_name='survey')))
 
 handler404 = 'survey.views.index'
 

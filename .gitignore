@@ -131,6 +131,9 @@ Desktop.ini
 ## Python
 #############
 
+.venv
+uwsgi.ini
+
 *.py[co]
 
 # Packages

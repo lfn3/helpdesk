@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.shortcuts import redirect, render, get_object_or_404
+from django.forms.models import model_to_dict
 
 from models import SurveyPub, SurveyPriv
 
@@ -10,25 +11,28 @@ def index(request):
 
 def fill(request, code):
     priv = get_object_or_404(SurveyPriv, code=code)
+    pub = priv.pub
 
     if priv.complete:
         raise Http404
 
-    return render(request, 'survey/fill.html', {'code': code})
+    return render(request, 'survey/' + pub.TEMPLATE, {'code': code})
 
 
 def post(request, code):
     priv = get_object_or_404(SurveyPriv, code=code)
+    pub = priv.pub
+    pub_dict = pub.model_to_dict(pub)
 
     try:
-        pub = SurveyPub(first_time_res=request.POST['first_time_res'], rating=request.POST['rating'], comment=request.POST['customer-comments'])
+        for key, value in pub_dict:
+            pub(key=request.post[key])
     except KeyError:
         return render(request, 'survey/fill.html',
             {'code': code, 'error_message': 'Please ensure the form is complete.'})
 
     pub.save()
 
-    priv.pub = pub
     priv.complete = True
     priv.save()
 

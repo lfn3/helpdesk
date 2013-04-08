@@ -5,7 +5,7 @@ Hello,
 We've sent you this email so that you can help us get a bit of insight into how well we're taking care of you.
 Please follow the link below to the survey.
 
-http://survey.iconz-webvisions.com/{{code}}
+http://survey.iconz.net/{{code}}
 
 Please note, this is not a phishing email. We won't be asking you for any identifying details, 
 nor will we ever ask you for your username of password in an email, 
