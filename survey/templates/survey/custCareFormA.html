@@ -11,7 +11,13 @@
 	</header>
 	<section>
 		<h1> Customer Care Satisfaction Survey </h1>
-		{% if error_message %}<p> <strong>{{error_message}} </strong> </p> {% endif %}
+		{% if messages %}
+		<p><strong> It looks like there was a problem:
+		    {% for message in messages %}
+    		<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    		{% endfor %}
+		</strong></p>
+		{% endif %}
 		<form action="{% url 'survey:post' code=code %}" method="post">
 			{% csrf_token %}
 			How do you rate the customer service you received from us?
