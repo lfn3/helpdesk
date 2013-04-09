@@ -1,10 +1,9 @@
 from django.http import Http404
 from django.shortcuts import redirect, render, get_object_or_404
 from django.forms.models import model_to_dict
+from django.utils.timezone import utc
 
 from models import SurveyPub, SurveyPriv
-
-from datetime import datetime
 
 def index(request):
     return redirect("http://www.iconz-webvisions.com/", permanent=True)
@@ -31,7 +30,7 @@ def post(request, code):
     pub = pub.__class__(id=pub.id, priv=pub.priv, **pub_dict)
     pub.save()
 
-    priv.completed_on = datetime.now()
+    priv.completed_on = timezone.now()
     priv.save()
 
     return render(request, 'survey/thanks.html')

@@ -4,11 +4,13 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+from django.contrib import messages
+from django.utils.timezone import utc
 from emailer import send_email
+from smtplib import SMTPAuthenticationError
 
 import string
 import random
-from datetime import datetime
 
 #Public stuff
 class SurveyPub(models.Model):
@@ -74,9 +76,9 @@ class SurveyPriv(models.Model):
 		if not self.is_email_sent():
 			try:
 				send_email(self)
-				self.email_sent_on = datetime.now()
+				self.email_sent_on = timezone.now()
 			except SMTPAuthenticationError as e:
-				pass
+				pass #Message is displayed in admin interface if this is an issue.
 
 		super(SurveyPriv, self).save(*args, **kwargs)
 
@@ -85,12 +87,14 @@ class SurveyPriv(models.Model):
 			return True
 		else:
 			return False
+	is_completed.boolean = True
 
 	def is_email_sent(self):
 		if self.email_sent_on != None:
 			return True
 		else:
 			return False
+	is_email_sent.boolean = True
 
 	def __unicode__(self):
 		return self.email_address
