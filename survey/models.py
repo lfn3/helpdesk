@@ -29,7 +29,7 @@ class CustCareSurveyA(SurveyPub):
 
 #Internal stuff
 class SurveyPriv(models.Model):
-	EMAIL_TEMPLATES = (('custCareEmailA', 'custCareA'), ('fake', 'fake'))
+	EMAIL_TEMPLATES = (('custCareEmailA', 'custCareA'),)
 
 	email_template = models.CharField(max_length=64, choices=EMAIL_TEMPLATES, blank=True)
 	email_address = models.CharField(max_length=254)
