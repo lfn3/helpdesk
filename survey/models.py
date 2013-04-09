@@ -8,6 +8,7 @@ from emailer import send_email
 
 import string
 import random
+from datetime import datetime
 
 #Public stuff
 class SurveyPub(models.Model):
@@ -33,7 +34,7 @@ class SurveyPriv(models.Model):
 
 	email_template = models.CharField(max_length=64, choices=EMAIL_TEMPLATES, blank=True)
 	email_address = models.CharField(max_length=254)
-	email_sent = models.BooleanField(default=False)
+	email_sent_on = models.DateTimeField(blank=True, null=True, editable=False)
 
 	def code_gen(length=4, chars=string.ascii_lowercase):
 		code = ''.join(random.choice(chars) for x in range(length))
@@ -53,7 +54,8 @@ class SurveyPriv(models.Model):
 
 	code = models.CharField(max_length=24, unique=True, default=code_gen)
 	notes = models.TextField(blank=True)
-	complete = models.BooleanField()
+
+	completed_on = models.DateTimeField(blank=True, null=True, editable=False)
 
 	def save(self, *args, **kwargs):
 		#Set email template if unset
@@ -69,11 +71,26 @@ class SurveyPriv(models.Model):
 			self.pub.save()
 
 		#If email hasn't been sent... send it.
-		if not self.email_sent:
-			send_email(self)
-			self.email_sent = True
+		if not self.is_email_sent():
+			try:
+				send_email(self)
+				self.email_sent_on = datetime.now()
+			except SMTPAuthenticationError as e:
+				pass
 
 		super(SurveyPriv, self).save(*args, **kwargs)
+
+	def is_completed(self):
+		if self.completed_on != None:
+			return True
+		else:
+			return False
+
+	def is_email_sent(self):
+		if self.email_sent_on != None:
+			return True
+		else:
+			return False
 
 	def __unicode__(self):
 		return self.email_address

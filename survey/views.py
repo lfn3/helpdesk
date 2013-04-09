@@ -4,6 +4,7 @@ from django.forms.models import model_to_dict
 
 from models import SurveyPub, SurveyPriv
 
+from datetime import datetime
 
 def index(request):
     return redirect("http://www.iconz-webvisions.com/", permanent=True)
@@ -13,7 +14,7 @@ def fill(request, code):
     priv = get_object_or_404(SurveyPriv, code=code)
     pub = priv.pub
 
-    if priv.complete:
+    if priv.is_completed():
         raise Http404
 
     return render(request, 'survey/' + pub.TEMPLATE, {'code': code})
@@ -30,7 +31,7 @@ def post(request, code):
     pub = pub.__class__(id=pub.id, priv=pub.priv, **pub_dict)
     pub.save()
 
-    priv.complete = True
+    priv.completed_on = datetime.now()
     priv.save()
 
     return render(request, 'survey/thanks.html')
