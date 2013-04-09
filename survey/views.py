@@ -22,15 +22,12 @@ def fill(request, code):
 def post(request, code):
     priv = get_object_or_404(SurveyPriv, code=code)
     pub = priv.pub
-    pub_dict = pub.model_to_dict(pub)
+    pub_dict = model_to_dict(pub, exclude=['id', 'priv'])
 
-    try:
-        for key, value in pub_dict:
-            pub(key=request.post[key])
-    except KeyError:
-        return render(request, 'survey/fill.html',
-            {'code': code, 'error_message': 'Please ensure the form is complete.'})
-
+    for key in pub_dict:
+        pub_dict[key] = request.POST[key]
+    
+    pub = pub.__class__(id=pub.id, priv=pub.priv, **pub_dict)
     pub.save()
 
     priv.complete = True

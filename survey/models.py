@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: latin-1 -*-
+
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
@@ -13,12 +16,15 @@ class SurveyPub(models.Model):
 	class Meta:
 		abstract = True	
 
+	def __unicode__(self):
+		return self.priv.email_address
+
 class CustCareSurveyA(SurveyPub):
 	TEMPLATE = "custCareFormA.html"
 
 	RATING_CHOICES = (('None', None), (0, 0), (1, 1), (2, 2), (3, 3))
 	rating = models.IntegerField(choices=RATING_CHOICES, blank=True, null=True)
-	comment = models.TextField(blank=True)
+	customer_comment = models.TextField(blank=True)
 	first_time_res = models.NullBooleanField(blank=True, null=True)
 
 #Internal stuff
@@ -68,3 +74,6 @@ class SurveyPriv(models.Model):
 			self.email_sent = True
 
 		super(SurveyPriv, self).save(*args, **kwargs)
+
+	def __unicode__(self):
+		return self.email_address
